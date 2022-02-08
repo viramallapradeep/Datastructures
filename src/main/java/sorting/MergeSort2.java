@@ -64,5 +64,4 @@ class MergeSort2 {
 
     }
 }
-/* This code is contributed by Rajat Mishra */
 
