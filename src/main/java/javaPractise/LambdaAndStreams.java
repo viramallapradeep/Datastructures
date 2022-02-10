@@ -2,6 +2,7 @@ package javaPractise;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LambdaAndStreams {
 
@@ -182,6 +183,57 @@ public class LambdaAndStreams {
         System.out.println("-------sort map--traditional--custom object--emp");
 
         List<Map.Entry<Integer, Employee>> mapESemp = getAllEmpMap().entrySet().stream().collect(Collectors.toList());
+
+        System.out.println("-----by--key------");
+
+        Collections.sort(mapESemp,Map.Entry.comparingByKey());
+
+        System.out.println("-----by--value------");
+
+        Collections.sort(mapESemp,Map.Entry.comparingByValue());
+
+        mapESemp.forEach(System.out::println);
+
+        System.out.println("---custom sort --by--key------");
+
+        Collections.sort(mapESemp,(v1,v2)->{
+        return v2.getKey() - v1.getKey();
+        });
+
+        mapESemp.forEach(System.out::println);
+
+        System.out.println("---custom sort --by--value------");
+
+        Collections.sort(mapESemp,(v1,v2)->{
+        return   v2.getValue().getName().compareTo(v1.getValue().getName());
+        });
+
+        mapESemp.forEach(System.out::println);
+
+        System.out.println("---Stream sort --by--key------");
+
+        getAllEmpMap().entrySet().stream().sorted(Map.Entry.comparingByKey()).forEach(System.out::println);
+
+        System.out.println("---Stream sort --by--key--desc----");
+
+        getAllEmpMap().entrySet().stream().sorted(Map.Entry.comparingByKey((v1,v2)->{
+            return v2-v1;
+        })).forEach(System.out::println);
+
+        System.out.println("---Stream sort --by--value-----");
+
+        getAllEmpMap().entrySet().stream().sorted((v1,v2)->{
+            return v2.getValue().getAge() - v1.getValue().getAge();
+        }). forEach(System.out::println);
+
+        System.out.println("---Stream sort --by--value--comparator---");
+
+        getAllEmpMap().entrySet().stream().sorted(Comparator.comparing(em->em.getValue().getName())).forEach(System.out::println);
+
+
+        System.out.println("-------------------map-------------------flat-Map-------------------------------------------------------------");
+
+
 
 
 
