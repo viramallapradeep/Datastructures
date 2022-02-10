@@ -14,7 +14,7 @@ public class LambdaAndStreams {
         list.add(new Employee(103,"raamu","kolkatta",67));
         list.add(new Employee(107,"suresh","chennai",25));
         list.add(new Employee(102,"pradeep","banglore",77));
-        list.add(new Employee(108,"sandeep","kerala",36));
+        list.add(new Employee(108,"pradeep","kerala",36));
 
     return list;
     }
@@ -233,6 +233,21 @@ public class LambdaAndStreams {
 
         System.out.println("-------------------map-------------------flat-Map-------------------------------------------------------------");
 
+           List<Integer> mapList= Arrays.asList(2,44,5,22,77,8,9,96).stream().map(v->v*10).collect(Collectors.toList());
+
+            mapList.forEach(System.out::println);
+
+        System.out.println("---emp--list-ids--");
+
+        List<Integer> listIds = getAllEmpList().stream().map(emp->emp.getId()).collect(Collectors.toList());
+
+        listIds.forEach(System.out::println);
+
+        System.out.println("---emp--list--names-");
+
+       Set<String> setNames = getAllEmpList().stream().map(emp->emp.getName()).collect(Collectors.toSet());
+
+       setNames.forEach(System.out::println);
 
 
 
