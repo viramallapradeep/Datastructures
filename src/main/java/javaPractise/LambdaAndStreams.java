@@ -231,7 +231,7 @@ public class LambdaAndStreams {
         getAllEmpMap().entrySet().stream().sorted(Comparator.comparing(em->em.getValue().getName())).forEach(System.out::println);
 
 
-        System.out.println("-------------------map-------------------flat-Map-------------------------------------------------------------");
+        System.out.println("-------------------map-------------------flat-Map-------on list------------------------------------------------------");
 
            List<Integer> mapList= Arrays.asList(2,44,5,22,77,8,9,96).stream().map(v->v*10).collect(Collectors.toList());
 
@@ -245,12 +245,27 @@ public class LambdaAndStreams {
 
         System.out.println("---emp--list--names-");
 
-       Set<String> setNames = getAllEmpList().stream().map(emp->emp.getName()).collect(Collectors.toSet());
+       List<String> setNames = getAllEmpList().stream().map(emp->emp.getName()).filter(v->v.equalsIgnoreCase("suresh")).collect(Collectors.toList());
 
        setNames.forEach(System.out::println);
 
+        System.out.println("-----flat--map----");
 
+        List<List<Integer>> dList = new ArrayList<>();
 
+        dList.add(Arrays.asList(55,6,54,22,63,2,457));
+        dList.add(Arrays.asList(5785,6,534,232,633,2,4257));
+        dList.add(Arrays.asList(505,6,504,22,633,2,4537));
+
+        List<Integer> resList = dList.stream().flatMap(v -> v.stream()).collect(Collectors.toList());
+        System.out.println("---------");
+        dList.stream().flatMap(v -> v.stream()).limit(3).collect(Collectors.toList()).forEach(System.out::println);
+
+        System.out.println(resList);
+
+        System.out.println("---------");
+
+        Arrays.asList(55,22,54,22,63,2,457).stream().distinct().limit(2).forEach(System.out::println);
 
     }
 
