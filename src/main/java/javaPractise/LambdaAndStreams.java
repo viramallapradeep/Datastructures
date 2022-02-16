@@ -26,7 +26,7 @@ public class LambdaAndStreams {
         map.put(1,new Employee(101,"raju","hyderabad",56));
         map.put(2,new Employee(108,"naresh","delhi",67));
         map.put(3,new Employee(103,"raamu","kolkatta",23));
-        map.put(4,new Employee(107,"suresh","chennai",56));
+        map.put(4,new Employee(107,"suresh","chennai",23));
         map.put(5,new Employee(102,"Pradeep","banglore",26));
         map.put(6,new Employee(104,"sandeep","kerala",88));
 
@@ -267,6 +267,127 @@ public class LambdaAndStreams {
 
         Arrays.asList(55,22,54,22,63,2,457).stream().distinct().limit(2).forEach(System.out::println);
 
+        System.out.println("---------");
+        Stream.of(getAllEmpList()).forEach(System.out::println);
+
+        System.out.println("---------");
+
+        Stream.of(Arrays.asList(new Employee(78,"rrr","ee",33))).forEach(System.out::println);
+
+        System.out.println("----limit--list---");
+
+        getAllEmpList().stream().map(emp->emp.getAge()).limit(2).forEach(System.out::println);
+
+        System.out.println("-----skip--list--");
+
+        getAllEmpList().stream().map(emp->emp.getAge()).skip(2).forEach(System.out::println);
+
+        System.out.println("-----min  max--list--");
+
+        Integer integer = getAllEmpList().stream().map(emp -> emp.getAge()).max(Comparator.comparing(Integer::valueOf)).get();
+
+//        Integer integer = getAllEmpList().stream().map(emp -> emp.getAge()).max(Comparator.comparing(Integer::valueOf)).get();
+
+        System.out.println(integer);
+
+        System.out.println("-----min  max--list--");
+
+        Employee employee = getAllEmpList().stream().min(Comparator.comparing( employee1 -> employee1.getAge())).get();
+
+        System.out.println("====="+employee);
+
+        System.out.println("-----min--map--");
+
+        Map.Entry<Integer, Employee> integerEmployeeEntry = getAllEmpMap().entrySet().stream().min((e1, e2) -> e1.getValue().getAge() - e2.getValue().getAge()).get();
+        System.out.println(integerEmployeeEntry.getValue());
+
+        System.out.println("-----Count--map--");
+
+
+        long count = getAllEmpMap().entrySet().stream().filter(e -> e.getValue().getAge() > 34).count();
+
+        System.out.println("---count--"+count);
+
+        System.out.println("--------toArray----Map----");
+        Object[] objects = getAllEmpMap().entrySet().stream().filter(e -> e.getValue().getAge() > 34).toArray();
+
+        System.out.println(Arrays.toString(objects));
+
+        System.out.println("--------find any----Map----");
+     getAllEmpMap().entrySet().stream().filter(e -> e.getValue().getAge() == 23).findAny().ifPresent(k-> System.out.println("age 23 emp== "+k));
+
+        System.out.println("--------findfirst----Map----");
+
+     getAllEmpMap().entrySet().stream().filter(e->e.getValue().getAge()>640).findFirst().
+             ifPresentOrElse(k-> System.out.println("llll==="+k),() -> {
+         System.out.println("No element found");
+     });
+
+        System.out.println("-------anyMatch-----map-------");
+
+        boolean anyMatch = getAllEmpMap().entrySet().stream().anyMatch(e -> e.getValue().getAge() > 34);
+
+        System.out.println("anyMatch=="+anyMatch);
+
+        System.out.println("-------allMatch-----map-------");
+
+        boolean allMatch = getAllEmpMap().entrySet().stream().allMatch(e -> e.getValue().getAge() < 34);
+
+        System.out.println("allMatch==="+allMatch);
+
+        System.out.println("-------allMatch-----map-------");
+
+        boolean noneMatch = getAllEmpMap().entrySet().stream().noneMatch(e -> e.getValue().getAge() > 129);
+
+        System.out.println("noneMatch==="+noneMatch);
+
+        System.out.println("----Terminal----collectors---list--tomap----");
+
+        Map<Integer, String> toMap = getAllEmpList().stream().collect(Collectors.toMap(Employee::getId, Employee::getName));
+            toMap.forEach((k,v)-> System.out.println(k+"--"+v));
+
+        System.out.println("--map--Terminal----collectors---toMap------");
+
+        Map<String, String> empMap = getAllEmpMap().entrySet().stream().collect(Collectors.toMap(e -> e.getValue().getName(), e -> e.getValue().getAddress()));
+
+        empMap.forEach((k,v)-> System.out.println(k+"---"+v));
+
+        System.out.println("--map--Terminal----collectors---joining------");
+
+        String joinString = getAllEmpMap().entrySet().stream().map(e -> e.getValue().getName()).collect(Collectors.joining("-"));
+
+        System.out.println("joinString==="+joinString);
+
+        System.out.println("--map--Terminal----collectors---groupBy---1---");
+
+        Map<String, List<Map.Entry<Integer, Employee>>> grupbyName = getAllEmpMap().entrySet().stream().collect(Collectors.groupingBy(e -> e.getValue().getName()));
+
+        grupbyName.forEach((k,v)->{
+            System.out.println(k+"=="+v);
+        });
+
+        System.out.println("--map--Terminal----collectors---groupBy---2---");
+        Map<Integer, List<Map.Entry<Integer, Employee>>> grpByAge = getAllEmpMap().entrySet().stream().collect(Collectors.groupingBy(e -> e.getValue().getAge()));
+
+
+        grpByAge.forEach((k,v)->{
+            System.out.println(k+"=="+v);
+        });
+
+        System.out.println("--List--reverse order--");
+       getIntList().stream().sorted(Comparator.reverseOrder()).forEach(System.out::println);
+        System.out.println("--List--reverse order-employees-");
+       getAllEmpList().stream().sorted(Comparator.reverseOrder()).forEach(System.out::println);
+        System.out.println("--Map--reverse order-employees-");
+       getAllEmpMap().entrySet().stream().sorted(Comparator.comparing(e->e.getKey(),Comparator.reverseOrder())). forEach(System.out::println);
+
+        System.out.println("---terminal----counting--------");
+
+        Long collect1 = getIntList().stream().filter(e->e>10).count();
+
+        System.out.println(collect1);
+
+        System.out.println("----counting and terminal from pic------");
     }
 
 }
