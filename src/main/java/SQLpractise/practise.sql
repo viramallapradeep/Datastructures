@@ -88,7 +88,7 @@ with temp as
  
  -- delete on join
  delete   employees from  employees  inner join dept_manager on employees.emp_no = dept_manager.emp_no 
- where employees.emp_no='110039'; 
+ where employees.emp_no='110039';
  
  select * from employees where emp_no='111692';
 

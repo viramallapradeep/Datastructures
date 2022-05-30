@@ -388,6 +388,7 @@ public class LambdaAndStreams {
         System.out.println(collect1);
 
         System.out.println("----counting and terminal from pic------");
+
     }
 
 }

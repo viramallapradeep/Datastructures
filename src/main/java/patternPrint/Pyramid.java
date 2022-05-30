@@ -54,13 +54,10 @@ public class Pyramid {
 
             for (int j = n - i; j > 1; j--) {
                 System.out.print(" ");
-
             }
 
             for (int j = 0; j <= i; j++) {
-
-                System.out.print("* "); //Print Star
-
+                System.out.print("*"); //Print Star
             }
 
             System.out.println();

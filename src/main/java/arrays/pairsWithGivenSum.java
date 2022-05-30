@@ -15,6 +15,7 @@ public class pairsWithGivenSum {
                 if (arr[i] + arr[j] == sum) {
                     count++;
                     break;
+
                 }
             }
 

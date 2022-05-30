@@ -7,9 +7,9 @@ public class PairsWithSum2 {
 
     public static void main(String[] args) {
 
-        int[] a = {1, 5, 7, 1};
+        int[] a = {1, 1, 1, 1};
 
-        int k = 6;
+        int k = 2;
 
 
         int count = 0;
@@ -29,7 +29,7 @@ public class PairsWithSum2 {
         for (int j : map.keySet()) {
 
             if (map.containsKey(k - j)) {
-                count++;
+                count +=map.get(k-j);
             }
 
         }
